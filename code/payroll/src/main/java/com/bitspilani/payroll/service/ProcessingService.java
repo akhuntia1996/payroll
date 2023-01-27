@@ -14,7 +14,11 @@ import com.bitspilani.payroll.dto.EmployeeRepository;
 import com.bitspilani.payroll.dto.EmployerRepository;
 import com.bitspilani.payroll.entity.Employee;
 import com.bitspilani.payroll.entity.Employer;
+import com.bitspilani.payroll.model.Print;
+import com.bitspilani.payroll.model.PrintCSV;
+import com.bitspilani.payroll.model.PrintPDF;
 import com.bitspilani.payroll.model.ProcessingStatus;
+import com.bitspilani.payroll.model.TaxNumbers;
 
 @Service
 public class ProcessingService {
@@ -58,38 +62,36 @@ public class ProcessingService {
                  * Local tax = 3%
                  * Medical Tax = 2%
                  */
-                double totalIncome = 0;
-                double totalstateTax = 0;
-                double totallocalTax = 0;
-                double totalmedicalTax = 0;
-                double totaldeduction  = 0;
-                double totalgross = 0;
+
+                TaxNumbers totalPage = new TaxNumbers();
 
                 for(Employee employee : perEREmployees){
 
                     if(employee.getStatus().equals(EmployeeStatus.INACTIVE.name()))
                         continue;
 
-                    // Calculate payroll
-                    double income = Double.parseDouble(employee.getTotalpay());
-                    double stateTax = income * 4 / 100;
-                    double localTax = income * 3 / 100;
-                    double medicalTax = income * 2 / 100;
-                    double deduction = (double)employee.getDeductions();
+                    logger.info("PROCESSING EMPLOYEE : " + employee.getId());
 
-                    double gross = income - (stateTax + localTax + medicalTax + deduction);
+                    // Calculate payroll
+                    TaxNumbers empPage = new TaxNumbers();
+                    empPage.calculateEmployeeTax(employee.getTotalpay(), employee.getDeductions());
 
                     // Update total variables 
-                    totalIncome += income;
-                    totalstateTax += stateTax;
-                    totallocalTax += localTax;
-                    totalmedicalTax += medicalTax;
-                    totaldeduction += deduction;
-                    totalgross += gross;
+                    totalPage.addValues(empPage);
 
                     // Generate PDF
+                    Print printPDF = new PrintPDF();
+                    printPDF.setEmployer(employer);
+                    printPDF.setEmployee(employee);
+                    printPDF.setTaxNumbers(empPage);
+                    printPDF.doPrint();
 
                     // Generate CSV file
+                    Print printCSV = new PrintCSV();
+                    printCSV.setEmployer(employer);
+                    printCSV.setEmployee(employee);
+                    printCSV.setTaxNumbers(empPage);
+                    printCSV.doPrint();
 
                     // Update Employee Status to INACTIVE
                 }
@@ -110,4 +112,5 @@ public class ProcessingService {
 
         return null;
     }
+
 }

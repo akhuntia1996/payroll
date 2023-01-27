@@ -17,13 +17,11 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-public class Print {
+public abstract class Print  {
     
     private Employer employer;
     private Employee employee;
-    private double stateTax;
-    private double localTax;
-    private double medicalTax;
-    private double deduction;
-    private double gross; 
+    private TaxNumbers taxNumbers;
+
+    public abstract void doPrint();
 }
