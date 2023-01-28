@@ -58,7 +58,12 @@ public class PrintPDF extends Print {
     public void doPrint() {
 
         Font font = FontFactory.getFont(FontFactory.TIMES_BOLD, 24);
-        Paragraph chunk = new Paragraph("EMPLOYEE PAYROLL REPORT\n\n", font);
+        Paragraph chunk = null;
+        if(this.getEmployee() == null){
+            chunk = new Paragraph("EMPLOYER TOTAL PAYROLL REPORT\n\n", font);
+        } else {
+            chunk = new Paragraph("EMPLOYEE PAYROLL REPORT\n\n", font);
+        }
         chunk.setAlignment(Paragraph.ALIGN_CENTER);
         document.add(chunk);
 
@@ -85,23 +90,23 @@ public class PrintPDF extends Print {
         table.addCell(" ");
 
         table.addCell("EMPLOYEE NAME :");
-        table.addCell(this.getEmployee().getName());
+        table.addCell( (this.getEmployee() != null) ? this.getEmployee().getName() : "");
 
         table.addCell("EMPLOYEE PHONE :");
-        table.addCell(this.getEmployee().getPhone());
+        table.addCell((this.getEmployee() != null) ? this.getEmployee().getPhone() : "");
 
         table.addCell("EMPLOYEE EMAIL :");
-        table.addCell(this.getEmployee().getEmail());
+        table.addCell((this.getEmployee() != null) ? this.getEmployee().getEmail() : "");
 
         table.addCell("EMPLOYEE ADDRESS :");
-        table.addCell(this.getEmployee().getAddress() + ", " + this.getEmployee().getRegion() + ", " +
-            this.getEmployee().getCountry());
+        table.addCell((this.getEmployee() != null) ? this.getEmployee().getAddress() + ", " + this.getEmployee().getRegion() + ", " +
+            this.getEmployee().getCountry() : "");
 
         table.addCell(" ");
         table.addCell(" ");
 
         table.addCell("EMPLOYEE SSN :");
-        table.addCell("XX-XX" + this.getEmployee().getSsn().substring(5));
+        table.addCell((this.getEmployee() != null) ? "XX-XX" + this.getEmployee().getSsn().substring(5) : "");
 
         table.addCell(" ");
         table.addCell(" ");

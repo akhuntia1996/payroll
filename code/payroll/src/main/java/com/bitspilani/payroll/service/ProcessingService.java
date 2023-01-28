@@ -104,6 +104,12 @@ public class ProcessingService {
                     // Update Employee Status to INACTIVE
                 }
 
+                // print Totals form PDF
+                printPDF.setEmployer(employer);
+                printPDF.setEmployee(null);
+                printPDF.setTaxNumbers(totalPage);
+                printPDF.doPrint();
+
                 printPDF.closeFile();
                 // Notification to Employer
 
