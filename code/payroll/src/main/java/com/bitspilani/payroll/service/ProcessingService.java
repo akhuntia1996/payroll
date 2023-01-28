@@ -46,6 +46,8 @@ public class ProcessingService {
 
             logger.info("NUMBER OF EMPLOYER FETCHED : " + employerList.size());
 
+            
+
             // Fetching Employee Details
             logger.info("FETCHING EMPLOYEE DETAILS");
 
@@ -65,6 +67,14 @@ public class ProcessingService {
 
                 TaxNumbers totalPage = new TaxNumbers();
 
+                if(perEREmployees.size() <= 0){
+                    logger.info("NO EMPLOYEE TO PROCESS FOR EMPLOYER : " + employer.getName());
+                    break;
+                }
+
+                Print printPDF = new PrintPDF(employer.getName());
+                Print printCSV = new PrintCSV(employer.getName());
+
                 for(Employee employee : perEREmployees){
 
                     if(employee.getStatus().equals(EmployeeStatus.INACTIVE.name()))
@@ -80,14 +90,12 @@ public class ProcessingService {
                     totalPage.addValues(empPage);
 
                     // Generate PDF
-                    Print printPDF = new PrintPDF();
                     printPDF.setEmployer(employer);
                     printPDF.setEmployee(employee);
                     printPDF.setTaxNumbers(empPage);
                     printPDF.doPrint();
 
                     // Generate CSV file
-                    Print printCSV = new PrintCSV();
                     printCSV.setEmployer(employer);
                     printCSV.setEmployee(employee);
                     printCSV.setTaxNumbers(empPage);
@@ -96,6 +104,7 @@ public class ProcessingService {
                     // Update Employee Status to INACTIVE
                 }
 
+                printPDF.closeFile();
                 // Notification to Employer
 
             }

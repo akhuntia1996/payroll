@@ -25,7 +25,7 @@ public class ProcessController {
     private ProcessingService processingService;
     
     @PostMapping("/process")
-    public ResponseEntity<ProcessingStatus> getData(@RequestParam Optional<String> employerName){
+    public ResponseEntity<ProcessingStatus> getData(@RequestParam Optional<String> employerName) throws Exception{
         
         logger.info("START PAYROLL PROCESSING");
 

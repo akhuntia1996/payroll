@@ -35,7 +35,7 @@ public class Employer {
     private String address;
 
     @Column(name = "postalZip")
-    private String postal;
+    private String postalZip;
 
     @Column(name = "region")
     private String region;

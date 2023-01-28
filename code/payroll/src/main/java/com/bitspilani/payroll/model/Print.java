@@ -24,4 +24,6 @@ public abstract class Print  {
     private TaxNumbers taxNumbers;
 
     public abstract void doPrint();
+    public abstract String generateFileName(String erName);
+    public abstract void closeFile();
 }

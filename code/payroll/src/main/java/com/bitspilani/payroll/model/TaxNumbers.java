@@ -25,7 +25,14 @@ public class TaxNumbers {
 
     public void calculateEmployeeTax(String totalpay, int deduction) {
 
-        double income = Double.parseDouble(totalpay);
+        String[] amt = totalpay.split(",");
+        StringBuilder totalPayFigure = new StringBuilder("");
+        totalPayFigure.append(amt[0].substring(1));
+        for(int i = 0; i < amt.length; i++){
+            totalPayFigure.append((i != 0) ? amt[i] : "" ) ;
+        }
+
+        double income = Double.parseDouble(totalPayFigure.toString());
 
         this.setTotalIncome(income);
         this.setTotalstateTax(income * 4 / 100);
