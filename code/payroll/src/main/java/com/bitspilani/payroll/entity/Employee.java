@@ -25,6 +25,12 @@ public class Employee {
     @Column(name = "name")
     private String name;
 
+    @Column(name = "username")
+    private String username;
+
+    @Column(name = "password")
+    private String password;
+
     @Column(name = "Employer")
     private String employer;
 
@@ -63,5 +69,8 @@ public class Employee {
 
     @Column(name = "Deductions")
     private int deductions;
+
+    @Column(name = "experience")
+    private int experience;
 
 }

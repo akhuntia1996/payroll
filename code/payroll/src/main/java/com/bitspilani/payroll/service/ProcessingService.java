@@ -111,6 +111,8 @@ public class ProcessingService {
                 printPDF.doPrint();
 
                 printPDF.closeFile();
+                printCSV.closeFile();
+
                 // Notification to Employer
 
             }

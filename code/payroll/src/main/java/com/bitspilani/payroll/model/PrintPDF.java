@@ -101,6 +101,9 @@ public class PrintPDF extends Print {
         table.addCell("EMPLOYEE ADDRESS :");
         table.addCell((this.getEmployee() != null) ? this.getEmployee().getAddress() + ", " + this.getEmployee().getRegion() + ", " +
             this.getEmployee().getCountry() : "");
+        
+        table.addCell("EMPLOYEE PAYROLL FREQUENCY :");
+        table.addCell((this.getEmployee() != null) ? this.getEmployee().getFrequency() : "");
 
         table.addCell(" ");
         table.addCell(" ");
