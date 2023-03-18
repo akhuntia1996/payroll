@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 28, 2023 at 12:01 PM
+-- Generation Time: Mar 18, 2023 at 05:14 PM
 -- Server version: 10.1.19-MariaDB
 -- PHP Version: 5.6.28
 
@@ -198,7 +198,31 @@ CREATE TABLE `hibernate_sequence` (
 --
 
 INSERT INTO `hibernate_sequence` (`next_val`) VALUES
-(1);
+(2);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `history`
+--
+
+CREATE TABLE `history` (
+  `sno` int(11) NOT NULL,
+  `employer_count` int(11) NOT NULL,
+  `employee_count` int(11) NOT NULL,
+  `reportcode` int(11) NOT NULL,
+  `employer` varchar(30) NOT NULL,
+  `year` int(11) NOT NULL,
+  `quarter` int(11) NOT NULL,
+  `processingtime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `history`
+--
+
+INSERT INTO `history` (`sno`, `employer_count`, `employee_count`, `reportcode`, `employer`, `year`, `quarter`, `processingtime`) VALUES
+(1, 1, 33, 863, 'ADP', 863, 3, '2023-03-18 16:12:07');
 
 --
 -- Indexes for dumped tables
@@ -215,6 +239,12 @@ ALTER TABLE `employee`
 --
 ALTER TABLE `employer`
   ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `history`
+--
+ALTER TABLE `history`
+  ADD PRIMARY KEY (`sno`);
 
 --
 -- AUTO_INCREMENT for dumped tables
