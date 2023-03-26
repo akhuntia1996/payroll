@@ -71,7 +71,7 @@ public class ProcessController {
             if(output.split(" ")[0].equals("WARNING:"))
                 output = executeCommand("pip install scikit-learn");
 
-            output = executeCommand("cd \"D:\\all-code\\Payroll\\code\\payroll\\python\" && py salaryPrediction.py " + file);
+            output = executeCommand("cd \"D:\\all-code\\Payroll\\code\\payroll\\python\" && runPython.bat " + file );
             
             return output;
             

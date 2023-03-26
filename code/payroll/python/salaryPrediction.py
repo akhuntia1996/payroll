@@ -4,6 +4,8 @@ import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 
+print(str(sys.argv[1]))
+
 dataset = pd.read_csv('../', str(sys.argv[1]))
 
 # print(dataset)
