@@ -1,11 +1,16 @@
 
+import sys
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 
-dataset = pd.read_csv('../CSV_Google_29-Jan-2023_12-46-30.csv')
+dataset = pd.read_csv('../', str(sys.argv[1]))
 
 # print(dataset)
+
+empid=dataset.iloc[:,0:1].values
+empname=dataset.iloc[:,1:2].values
+# print(empid)
 
 x=dataset.iloc[:,3:4].values
 y=dataset.iloc[:,9:10].values
@@ -33,8 +38,13 @@ poly=PolynomialFeatures(degree=2)
 x_poly=poly.fit_transform(x)
 regressor.fit(x_poly,y)
 y_pred=regressor.predict(poly.fit_transform(x))
-# print(y_pred)
+
+#print(y_pred)
  
+#print(y)
 
+result=np.hstack((y, y_pred))
+result=np.hstack((empname,result))
+result=np.hstack((empid,result))
 
-#print(df)
+print(result)

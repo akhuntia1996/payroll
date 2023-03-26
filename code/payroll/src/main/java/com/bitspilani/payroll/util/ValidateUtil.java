@@ -18,7 +18,6 @@ public class ValidateUtil {
         if(inputCard.getQuarter() < 1 || inputCard.getQuarter() > 4)
             return "Invalid Quarter";
 
-        System.out.println("........." + inputCard.getReportCode());
         if(inputCard.getReportCode() != 863 && inputCard.getReportCode() != 820)
             return "Invalid Report Code";
         

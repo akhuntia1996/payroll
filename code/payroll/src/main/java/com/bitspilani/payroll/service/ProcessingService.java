@@ -60,6 +60,10 @@ public class ProcessingService {
                 processingStatus.setMessage(cardValidationMessage);
                 return processingStatus;
             }
+
+            logger.info("INPUT CARD FOUND : EMPLOYER : " + inputCard.getEmployer() 
+                + ", REPORT CODE : "+ inputCard.getReportCode() +", YEAR : "+ inputCard.getYear() 
+                +", QUARTER : "+ inputCard.getQuarter() +", RUN TYPE : " + inputCard.getRunType());
             
 
             // Fetching Employer details 
