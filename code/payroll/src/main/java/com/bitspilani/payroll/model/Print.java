@@ -26,4 +26,5 @@ public abstract class Print  {
     public abstract void doPrint();
     public abstract String generateFileName(String erName);
     public abstract void closeFile();
+    public abstract String getFileName();
 }

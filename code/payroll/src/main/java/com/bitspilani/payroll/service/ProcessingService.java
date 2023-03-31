@@ -72,6 +72,7 @@ public class ProcessingService {
 
             int employee_count = 0;
             int employer_count = 0;
+            StringBuilder allFileNames = new StringBuilder("");
 
             List<Employer> employerList = new ArrayList<>();
             employerList = employerRepository.findByName(inputCard.getEmployer());
@@ -155,25 +156,36 @@ public class ProcessingService {
 
                 // Notification to Employer
 
+                logger.info("TOTAL EMPLOYEES PROCESSED : " + employeeList.size());
+
+                logger.info("INVOKING AUTOPAY PHASE 6 (PRINTOUTS)");
+
+                logger.info("INVOKING AUTOPAY PHASE 7 (AUDITING)");
+
+                History history = new History();
+
+                history.setRuntype(inputCard.getRunType());
+                history.setEmployee_count(employee_count);
+                history.setReportcode(inputCard.getReportCode());
+                history.setYear(inputCard.getYear());
+                history.setQuarter(inputCard.getQuarter());
+                history.setEmployer(inputCard.getEmployer());
+                history.setProcessingtime(Timestamp.valueOf(LocalDateTime.now()));
+                history.setCsvfile(printCSV.getFileName());
+                history.setPdffile(printPDF.getFileName());
+
+                historyRepository.save(history);
+
+                allFileNames.append(printPDF.getFileName() + ", ");
+
             }
 
-            logger.info("TOTAL EMPLOYEES PROCESSED : " + employeeList.size());
-
-            logger.info("INVOKING AUTOPAY PHASE 6 (PRINTOUTS)");
-
-            logger.info("INVOKING AUTOPAY PHASE 7 (AUDITING)");
-
-            History history = new History();
-
-            history.setEmployer_count(employer_count);
-            history.setEmployee_count(employee_count);
-            history.setReportcode(inputCard.getReportCode());
-            history.setYear(inputCard.getReportCode());
-            history.setQuarter(inputCard.getQuarter());
-            history.setEmployer(inputCard.getEmployer());
-            history.setProcessingtime(Timestamp.valueOf(LocalDateTime.now()));
-
-            historyRepository.save(history);
+            processingStatus.setStatus(Status.SUCCESS);
+            processingStatus.setMessage("PAYROLL PROCESSED SUCCESSFULLY");
+            processingStatus.setEmployer(employer_count);
+            processingStatus.setEmployee(employee_count);
+            processingStatus.setPages(employee_count + 1);
+            processingStatus.setFilename(allFileNames.substring(0,allFileNames.length()-2).toString());
 
         } catch(Exception ee) {
             ee.printStackTrace();
@@ -182,7 +194,7 @@ public class ProcessingService {
             logger.info("PAYROLL PROCESSED SUCCESSFULLY");
         }
 
-        return null;
+        return processingStatus;
     }
 
     

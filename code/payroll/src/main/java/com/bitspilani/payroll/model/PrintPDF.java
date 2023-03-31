@@ -29,6 +29,8 @@ public class PrintPDF extends Print {
     private Document document;
     private PdfPTable table;
 
+    private String fileName;
+
     private int count;
 
     private NumberFormat nfUK;
@@ -39,6 +41,8 @@ public class PrintPDF extends Print {
         document = new Document(PageSize.A4);
 
         try {
+            fileName = "";
+
             PdfWriter.getInstance(document, new FileOutputStream(generateFileName(erName)));
             logger.info("PDF FILE CREATED SUCCESSFULLY");
 
@@ -52,6 +56,11 @@ public class PrintPDF extends Print {
             ee.printStackTrace();
         }
 
+    }
+
+    @Override
+    public String getFileName(){
+        return this.fileName;
     }
 
     @Override
@@ -151,6 +160,7 @@ public class PrintPDF extends Print {
     public String generateFileName(String erName) {
         String filename = "PDF_" + erName + "_" + 
             LocalDateTime.now().format(DateTimeFormatter.ofPattern("d-MMM-uuuu_HH-mm-ss")) + ".pdf";
+        this.fileName = filename;
         return filename;
     }
 

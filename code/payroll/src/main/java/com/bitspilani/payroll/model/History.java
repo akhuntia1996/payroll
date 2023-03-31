@@ -24,11 +24,14 @@ public class History {
     @GeneratedValue
     private int sno;
 
-    private int employer_count;
+    private String runtype;
     private int employee_count;
     private int reportcode;
     private String employer;
     private int year;
     private int quarter;
     private Timestamp processingtime;
+    private String csvfile;
+    private String pdffile;
+
 }

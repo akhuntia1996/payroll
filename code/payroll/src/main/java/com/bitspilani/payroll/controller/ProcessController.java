@@ -18,7 +18,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.bitspilani.payroll.model.InputCard;
 import com.bitspilani.payroll.model.ProcessingStatus;
+import com.bitspilani.payroll.service.AnnonlyProcessingService;
 import com.bitspilani.payroll.service.ProcessingService;
+import com.bitspilani.payroll.service.ReprintProcessingService;
 
 @RestController
 public class ProcessController {
@@ -27,6 +29,12 @@ public class ProcessController {
 
     @Autowired
     private ProcessingService processingService;
+
+    @Autowired
+    private AnnonlyProcessingService annopnlyProcessingService;
+
+    @Autowired
+    private ReprintProcessingService reprintProcessingService;
 
     public String executeCommand(String cmd) throws Exception{
 
@@ -92,7 +100,13 @@ public class ProcessController {
         logger.info("START TIMESTAMP : " + startTime);
     
         // Processing Service Call 
-        ProcessingStatus processingStatus = processingService.process(inputCard);
+        ProcessingStatus processingStatus = null;
+        if(inputCard.getRunType().trim().isEmpty())
+            processingStatus = processingService.process(inputCard);
+        else if(inputCard.getRunType().trim().equalsIgnoreCase("annonly"))
+            processingStatus = processingService.process(inputCard);
+        else
+            processingStatus = reprintProcessingService.process(inputCard);
         
         LocalDateTime endTime = LocalDateTime.now();
         logger.info("END TIMESTAMP : " + endTime);

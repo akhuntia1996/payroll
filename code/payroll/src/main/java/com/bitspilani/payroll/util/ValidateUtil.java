@@ -22,8 +22,8 @@ public class ValidateUtil {
             return "Invalid Report Code";
         
         if((!inputCard.getRunType().trim().isEmpty()) && 
-            (!inputCard.getRunType().trim().equals("Annonly")) &&
-            (!inputCard.getRunType().trim().equals("Reprint")) )
+            (!inputCard.getRunType().trim().equalsIgnoreCase("Annonly")) &&
+            (!inputCard.getRunType().trim().equalsIgnoreCase("Reprint")) )
             return "Invalid RunType";
 
         return "Validated Successfully";
