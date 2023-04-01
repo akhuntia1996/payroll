@@ -6,7 +6,9 @@ import matplotlib.pyplot as plt
 
 print(str(sys.argv[1]))
 
-dataset = pd.read_csv('../', str(sys.argv[1]))
+# dataset = pd.read_csv('../', str(sys.argv[1]))
+ # CSV_ADP_1-Apr-2023_09-22-49.csv
+dataset = pd.read_csv('../CSV_ADP_1-Apr-2023_09-22-49.csv',encoding='latin-1')
 
 # print(dataset)
 
