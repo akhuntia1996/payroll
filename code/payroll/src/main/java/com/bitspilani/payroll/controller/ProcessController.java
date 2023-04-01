@@ -104,7 +104,7 @@ public class ProcessController {
         if(inputCard.getRunType().trim().isEmpty())
             processingStatus = processingService.process(inputCard);
         else if(inputCard.getRunType().trim().equalsIgnoreCase("annonly"))
-            processingStatus = processingService.process(inputCard);
+            processingStatus = annopnlyProcessingService.process(inputCard);
         else
             processingStatus = reprintProcessingService.process(inputCard);
         

@@ -10,6 +10,7 @@ import com.bitspilani.payroll.entity.Employee;
 @Repository
 public interface EmployeeRepository extends JpaRepository<Employee, Integer> {
 
-    List<Employee> findByEmployer(String employerName);
+    public List<Employee> findByEmployer(String employerName);
+    public Employee findBySsn(String ssn);
     
 }

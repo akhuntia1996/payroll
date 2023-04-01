@@ -26,7 +26,7 @@ import com.opencsv.CSVReader;
 @Service
 public class ReprintProcessingService {
 
-    private final Logger logger = LoggerFactory.getLogger(ProcessingService.class);
+    private final Logger logger = LoggerFactory.getLogger(ReprintProcessingService.class);
 
     @Autowired
     private HistoryRepository historyRepository;
@@ -129,7 +129,7 @@ public class ReprintProcessingService {
             newhistory.setRuntype(inputCard.getRunType());
             newhistory.setEmployee_count(employee_count);
             newhistory.setReportcode(inputCard.getReportCode());
-            newhistory.setYear(inputCard.getReportCode());
+            newhistory.setYear(inputCard.getYear());
             newhistory.setQuarter(inputCard.getQuarter());
             newhistory.setEmployer(inputCard.getEmployer());
             newhistory.setProcessingtime(Timestamp.valueOf(LocalDateTime.now()));

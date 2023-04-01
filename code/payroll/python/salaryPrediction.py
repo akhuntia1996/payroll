@@ -14,8 +14,8 @@ empid=dataset.iloc[:,0:1].values
 empname=dataset.iloc[:,1:2].values
 # print(empid)
 
-x=dataset.iloc[:,3:4].values
-y=dataset.iloc[:,9:10].values
+x=dataset.iloc[:,13:14].values
+y=dataset.iloc[:,18:19].values
 
 id=dataset.iloc[:,:1].values
 name=dataset.iloc[:,1:2].values
