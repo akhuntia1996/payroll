@@ -135,6 +135,8 @@ public class AnnonlyProcessingService {
                     
                     employee_count++;
 
+                    logger.info("PROCESSING EMPLOYEE : " + dbEmp.getId());
+
                     // Calculate payroll
                     TaxNumbers empPage = new TaxNumbers();
                     empPage.calculateEmployeeTax(employee.getTotalpay(), employee.getDeductions());

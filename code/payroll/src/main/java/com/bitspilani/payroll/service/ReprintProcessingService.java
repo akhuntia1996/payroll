@@ -108,6 +108,8 @@ public class ReprintProcessingService {
 
                 totalTaxNumbers.addValues(taxNumbers);
 
+                logger.info("PROCESSING EMPLOYEE : " + nextRecord[0]);
+
                 printPDF.setEmployer(employer);
                 printPDF.setEmployee(employee);
                 printPDF.setTaxNumbers(taxNumbers);
