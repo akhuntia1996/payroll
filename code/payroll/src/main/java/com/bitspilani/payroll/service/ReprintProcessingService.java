@@ -97,8 +97,8 @@ public class ReprintProcessingService {
                 employee.setAddress(nextRecord[4]);
                 employee.setRegion(nextRecord[5]);
                 employee.setCountry(nextRecord[6]);
-                employee.setFrequency(nextRecord[19]);
-                employee.setSsn(nextRecord[20]);
+                employee.setFrequency(nextRecord[20]);
+                employee.setSsn(nextRecord[21]);
 
                 taxNumbers.setTotalIncome(Double.parseDouble(nextRecord[14].replace("$","").replace(",","")));
                 taxNumbers.setTotalstateTax(Double.parseDouble(nextRecord[15].replace("$","").replace(",","")));
